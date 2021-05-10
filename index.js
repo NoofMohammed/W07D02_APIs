@@ -12,58 +12,45 @@ const users = [
 ];
 // a GET request on endpoint http://localhost:3000/users
 app.get("/users", (req, res) => {
-    // set the response status code to 200 (OK)
-    res.status(200);
-    // sends back a response of all users
-    res.json(users);
+  // set the response status code to 200 (OK)
+  res.status(200);
+  // sends back a response of all users
+  res.json(users);
+});
+
+app.get("/first-user", (req, res) => {
+  const firstUser = users[0];
+  res.status(200);
+  res.json(firstUser);
+});
+app.get("/", (req, res) => {
+  // const firstUser = (users[0])
+  res.status(200);
+  res.json("hello world");
+});
+//paramete
+app.get("/user/:name", (req, res) => {
+  const user = req.params.name;
+  const found = users.find((element) => {
+    return element.name === user;
   });
-//   app.get("/first", (req, res) => {
-      
-//     //  const firstUser = (users[0])
-//     //  console.log(firstUser)
-//     // // set the response status code to 200 (OK)
-//     // res.status(200);
-//     // sends back a response of all users
-//     res.json("hello");
+  if (found) {
+    res.status(200);
+    res.json(found);
+  } else {
+    res.status(404);
+    res.json("User not found");
+  }
+});
 
-//   });
+app.post("/create/user", (req, res) => {
+  const newUser = { name: req.body.name, age: req.body.age };
+  users.push(newUser);
+  res.status(201);
 
-app.get("/firstUser" , (req,res)=>{
-    console.log("nnnnnnnnn")
-    res.status(200)
-    res.json("hi")
-})
-  //paramete
-  app.get("/user/:name",(req,res)=>{
-    const user = req.params.name
-    const found = users.find((element)=>{
-        return element.name === user;
-    });
-        if(found){
-            res.status(200);
-            res.json(found);
-        }
-        else{
-            res.status(404);
-            res.json("User not found");
+  res.json(newUser);
+});
 
-        }
-    })
-    
-    app.post("/create/user", (req, res) => {
-        
-        const newUser = { name: req.body.name, age: req.body.age }
-        users.push(newUser);
-        res.status(201);
-        
-        res.json(newUser);
-       
-      });
-      
-  
-
-
-
-app.listen(port,()=>{
-    console.log(`listen .....on ${port}`)
-})
+app.listen(port, () => {
+  console.log(`listen .....on ${port}`);
+});
