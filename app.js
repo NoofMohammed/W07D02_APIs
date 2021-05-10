@@ -48,6 +48,7 @@ app.delete("/delete/todo/:name", (req, res) => {
   res.json(dele);
 });
 app.put("/complete/todo/:name", (req, res) => {
+  res.send("bbbb");
   let complete = {};
   const name = req.params.name;
   for (let i = 0; i < todos.length; i++) {
@@ -60,10 +61,11 @@ app.put("/complete/todo/:name", (req, res) => {
   res.json(complete);
 });
 app.get("/completed/todos", (req, res) => {
-  let completeAll = {};
+  let completeAll = [];
   for (let i = 0; i < todos.length; i++) {
-    todos[i].isCompleted = true;
-    completeAll = todos[i];
+    if (todos[i].isCompleted === true) {
+      completeAll.push(todos[i]);
+    }
   }
   res.status(201);
   res.json(completeAll);
