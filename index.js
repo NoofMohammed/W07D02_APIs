@@ -17,6 +17,22 @@ app.get("/users", (req, res) => {
     // sends back a response of all users
     res.json(users);
   });
+//   app.get("/first", (req, res) => {
+      
+//     //  const firstUser = (users[0])
+//     //  console.log(firstUser)
+//     // // set the response status code to 200 (OK)
+//     // res.status(200);
+//     // sends back a response of all users
+//     res.json("hello");
+
+//   });
+
+app.get("/firstUser" , (req,res)=>{
+    console.log("nnnnnnnnn")
+    res.status(200)
+    res.json("hi")
+})
   //paramete
   app.get("/user/:name",(req,res)=>{
     const user = req.params.name
@@ -49,5 +65,5 @@ app.get("/users", (req, res) => {
 
 
 app.listen(port,()=>{
-    console.log(`listen on ${port}`)
+    console.log(`listen .....on ${port}`)
 })
